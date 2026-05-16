@@ -1,0 +1,13 @@
+# Docker
+.docker/
+*.log
+
+# Windows
+Thumbs.db
+Desktop.ini
+
+# OS X
+.DS_Store
+
+# Git
+.git/
