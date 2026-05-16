@@ -32,12 +32,14 @@ services:
 
   loki:
     image: grafana/loki:2.9.0
+    command: -config.file=/etc/loki/local-config.yaml
+    volumes:
+      - loki-data:/loki
     configs:
       - source: loki_config
         target: /etc/loki/local-config.yaml
     deploy:
       replicas: 1
-
     networks:
       - network_public
 
@@ -60,6 +62,7 @@ networks:
 
 volumes:
   grafana-data:
+  loki-data:
 
 configs:
   prometheus_config:
