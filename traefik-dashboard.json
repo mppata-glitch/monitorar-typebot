@@ -1,142 +1,120 @@
 {
-  "annotations": {
-    "list": [
-      {
-        "builtIn": 1,
-        "datasource": {
-          "type": "grafana",
-          "uid": "-- Grafana --"
-        },
+  "annotations": [
+    {
+      "kind": "AnnotationQuery",
+      "spec": {
+        "builtIn": true,
         "enable": true,
         "hide": true,
         "iconColor": "rgba(0, 211, 255, 1)",
         "name": "Annotations & Alerts",
-        "type": "dashboard"
+        "query": {
+          "datasource": {
+            "name": "-- Grafana --"
+          },
+          "group": "grafana",
+          "kind": "DataQuery",
+          "spec": {},
+          "version": "v0"
+        }
       }
-    ]
-  },
-  "editable": true,
-  "fiscalYearStartMonth": 0,
-  "graphTooltip": 0,
-  "links": [],
-  "liveNow": false,
-  "panels": [
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 4,
-        "w": 6,
-        "x": 0,
-        "y": 0
-      },
-      "id": 1,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "area",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "textMode": "auto"
-      },
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "expr": "sum(traefik_entrypoint_requests_total)",
-          "refId": "A"
-        }
-      ],
-      "title": "Total HTTP Requests",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "unit": "reqps"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 12,
-        "x": 0,
-        "y": 4
-      },
-      "id": 2,
-      "options": {
-        "legend": {
-          "displayMode": "list",
-          "placement": "bottom",
-          "showLegend": true
-        },
-        "tooltip": {
-          "mode": "single"
-        }
-      },
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "expr": "sum(irate(traefik_service_requests_total[5m])) by (service_name)",
-          "legendFormat": "{{service_name}}",
-          "refId": "A"
-        }
-      ],
-      "title": "Requests per Second by Service",
-      "type": "timeseries"
     }
   ],
-  "refresh": "5s",
-  "schemaVersion": 36,
-  "style": "dark",
-  "tags": [
-    "traefik"
-  ],
-  "templating": {
-    "list": []
+  "cursorSync": "Off",
+  "editable": true,
+  "elements": {
+    "total-requests": {
+      "kind": "Panel",
+      "spec": {
+        "title": "Total HTTP Requests",
+        "type": "stat",
+        "pluginVersion": "11.0.0",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "prometheus"
+            },
+            "expr": "sum(traefik_entrypoint_requests_total)",
+            "refId": "A"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "color": { "mode": "thresholds" },
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [{ "color": "green", "value": null }]
+            }
+          }
+        },
+        "options": {
+          "colorMode": "value",
+          "graphMode": "area",
+          "justifyMode": "auto"
+        }
+      }
+    },
+    "rps-service": {
+      "kind": "Panel",
+      "spec": {
+        "title": "Requests per Second by Service",
+        "type": "timeseries",
+        "pluginVersion": "11.0.0",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "prometheus"
+            },
+            "expr": "sum(irate(traefik_service_requests_total[5m])) by (service_name)",
+            "legendFormat": "{{service_name}}",
+            "refId": "A"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "color": { "mode": "palette-classic" },
+            "unit": "reqps"
+          }
+        }
+      }
+    }
   },
-  "time": {
+  "layout": {
+    "kind": "GridLayout",
+    "spec": {
+      "items": [
+        {
+          "x": 0,
+          "y": 0,
+          "w": 6,
+          "h": 5,
+          "element": "total-requests"
+        },
+        {
+          "x": 6,
+          "y": 0,
+          "w": 18,
+          "h": 10,
+          "element": "rps-service"
+        }
+      ]
+    }
+  },
+  "links": [],
+  "liveNow": false,
+  "preferences": {},
+  "preload": false,
+  "tags": ["traefik"],
+  "timeSettings": {
+    "autoRefresh": "5s",
+    "fiscalYearStartMonth": 0,
     "from": "now-1h",
+    "hideTimepicker": false,
+    "timezone": "browser",
     "to": "now"
   },
-  "title": "Traefik Simple Dashboard",
-  "version": 1
+  "title": "Traefik Dashboard (V3 Scenes)",
+  "variables": []
 }
