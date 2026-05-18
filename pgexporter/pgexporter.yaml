@@ -1,0 +1,16 @@
+version: "3.9"
+
+networks:
+  network_public:
+    external: true
+
+services:
+  pg_exporter:
+    image: prometheuscommunity/postgres-exporter
+    ports:
+      - "9187:9187"
+    environment:
+      # Ajuste usuário, senha e banco conforme seu PostgreSQL
+      DATA_SOURCE_NAME: "postgresql://${pg_user}:${pg_password}@${pg_host}:${pg_port}/${pg_base}?sslmode=disable"
+    networks:
+      - network_public
