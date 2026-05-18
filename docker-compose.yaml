@@ -3,7 +3,6 @@ version: "3.9"
 services:
   prometheus:
     image: prom/prometheus
-    description: "Prometheus Metrics Collector"
     configs:
       - source: prometheus_config
         target: /etc/prometheus/prometheus.yml
