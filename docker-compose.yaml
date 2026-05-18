@@ -23,7 +23,7 @@ services:
       replicas: 1
       labels:
         - "traefik.enable=true"
-        - "traefik.http.routers.grafana.rule=Host(`grafana.${DOMAIN}`)"
+        - "traefik.http.routers.grafana.rule=Host(`${DOMAIN}`)"
         - "traefik.http.routers.grafana.entrypoints=websecure"
         - "traefik.http.routers.grafana.tls.certresolver=letsencrypt"
         - "traefik.http.services.grafana.loadbalancer.server.port=3000"
