@@ -13,6 +13,6 @@ services:
       - "9187:9187"
     environment:
       # Ajuste usuário, senha e banco conforme seu PostgreSQL
-      DATA_SOURCE_NAME: "postgresql://${pg_user}:${pg_password}@${pg_host}:${pg_port}/${pg_base}?sslmode=disable"
+      DATA_SOURCE_NAME: "postgresql://${pg_user}:${pg_password}@${pg_host}:${pg_port}/${pg_database}?sslmode=disable"
     networks:
       - network_public

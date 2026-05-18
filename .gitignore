@@ -7,7 +7,7 @@
 
 # Docker
 .docker/
-
+log/*
 *.log
 
 # Windows
