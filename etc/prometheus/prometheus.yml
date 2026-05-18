@@ -22,5 +22,9 @@ scrape_configs:
         regex: '(.+)@docker'
         target_label: router_name
         replacement: '${1}'
-
-
+  - job_name: 'postgresql'
+    static_configs:
+      - targets: ['pg_exporter:9187']
+  - job_name: 'node'
+    static_configs:
+      - targets: ['node_exporter:9100']
