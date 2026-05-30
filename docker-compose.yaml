@@ -3,6 +3,8 @@ version: "3.9"
 services:
   prometheus:
     image: prom/prometheus
+    extra_hosts:
+      - "interno:host-gateway"    
     configs:
       - source: prometheus_config
         target: /etc/prometheus/prometheus.yml
@@ -14,6 +16,8 @@ services:
 
   grafana:
     image: grafana/grafana
+    extra_hosts:
+      - "interno:host-gateway"
     environment:
       - GF_SERVER_DOMAIN=${DOMAIN}
       - GF_SERVER_ROOT_URL=https://${DOMAIN}
