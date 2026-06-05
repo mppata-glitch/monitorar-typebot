@@ -27,4 +27,4 @@ scrape_configs:
       - targets: ['pg_exporter:9187']
   - job_name: node
     static_configs:
-      - targets: ['localhost:9100']
+      - targets: ['interno:9100']
